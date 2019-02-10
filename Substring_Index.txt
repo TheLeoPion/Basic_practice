@@ -1,0 +1,59 @@
+/* Program to find the starting index of a substring within a main string*/
+/* Condition 1  - '*' character can be included in substring */
+/* Condition 2 - if substring is not present then return -1 */
+
+#include <stdio.h>
+#include <string.h>
+
+int firstindex(char* main, char* sub)
+{
+    int index = -1;
+    int count;
+    int sublength = strlen(sub);
+    printf("mainlenght = %d", strlen(main));
+              
+    for(int i=0; i<strlen(main); i++)
+    {
+      for(int j=0; j<strlen(sub); j++)
+      {
+        if((sub[j] == main[i])||(sub[j]=='*'))
+        {
+          count = 0;
+          
+          for(int k=i; k<(i+sublength); k++)
+          {
+            printf("\nsub = %c, main = %c",sub[count],main[k]);
+            if((sub[count] == main[k])||(sub[count] == '*'))
+            {
+              count++;
+              printf("\tTrue, count = %d", count);
+            }
+            else
+            {
+              break;
+            }
+          }
+          
+          if (count == sublength)
+          {
+            index = i;
+          }       
+        }
+        else
+        {
+            break;
+        }
+      }
+    }
+    
+    return index;
+}
+
+int main()
+{
+    char mainstring[12] = "whatiswhere";
+    char substring[6] = "aaa";
+    
+    printf("\nThe index is %d", firstindex(mainstring, substring));
+    return 0;
+}
